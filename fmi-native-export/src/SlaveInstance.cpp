@@ -8,6 +8,7 @@
 #include <jni.h>
 #include <string>
 #include <utility>
+#include <cassert>
 
 namespace fmu4j
 {
@@ -47,6 +48,9 @@ SlaveInstance::SlaveInstance(
 
     ctorId_ = env->GetMethodID(slaveCls, "<init>", "(Ljava/util/Map;)V");
     if (ctorId_ == nullptr) {
+        if (env->ExceptionCheck()) {
+			env->ExceptionDescribe();
+		}
         std::string msg =
             "Unable to locate 1 arg constructor that takes a Map for slave class '" + slaveName_ + "'!";
         throw cppfmu::FatalError(msg.c_str());

@@ -78,7 +78,6 @@ jobject create_classloader(JNIEnv* env, const std::string& classpath)
     } else {
         path.insert(0, "file:/");
     }
-
     const char* cClasspath = path.c_str();
     jstring jClasspath = env->NewStringUTF(cClasspath);
 
@@ -113,7 +112,6 @@ JNIEnv* get_or_create_jvm(JavaVM** jvm)
     JavaVMInitArgs args;
     args.version = JNI_VERSION_1_8;
     args.nOptions = 0;
-
     rc = JNI_CreateJavaVM(jvm, (void**)&env, &args);
     if (rc == JNI_OK) {
         std::cout << "[FMU4j native] Created a new JVM." << std::endl;
