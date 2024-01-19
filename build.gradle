@@ -21,6 +21,13 @@ subprojects { sub ->
 
     pluginManager.withPlugin('java') {
 
+	java {
+   	 sourceCompatibility = JavaVersion.VERSION_15
+   	 targetCompatibility = JavaVersion.VERSION_15
+	}
+
+
+
         repositories {
             mavenCentral()
         }
@@ -33,13 +40,13 @@ subprojects { sub ->
 
             compileKotlin {
                 kotlinOptions {
-                    jvmTarget = "1.8"
+                    jvmTarget = "15"
                     javaParameters = true
                 }
             }
 
             compileTestKotlin {
-                kotlinOptions.jvmTarget = "1.8"
+                kotlinOptions.jvmTarget = "15"
             }
         }
 

@@ -2,13 +2,41 @@
 
 FMU4j is a software package for the JVM that enables
 export of models compatible with FMI 2.0 for Co-simulation.
+This fork is intended to grow into support for importing
+DEVS models implemented in Java into a C++ simulation.
 
-Linux and Windows are supported.
+Linux is supported. Maybe Windows, eventually.
 
-Note that Python 3.7 < is known to cause issues on Windows. 
-FMUs might not work in that environment.
+The original has aged some. You will want to get and install
+JDK 15. Make sure your JAVA_HOME points to this directory
+before building anything.
 
-Get started using [this](https://github.com/Vico-platform/fmu4j_template) template repository.
+To build the support library, do the following in the
+top level directory:
+
+./gradlew clean; ./gradlew buildNative ; ./gradlew build ; ./gradlew installDist
+
+To run the example, go to devs-fmu. Edit the build.sh and test_fmu.cpp files
+to make your environment. Then execute
+
+bash build.sh ; ./a.out
+
+If all goes well, the example will build and run.
+
+To create your own FMU importer for your C++ DEVS simulator check out fmu.cpp
+for an example / starting point.
+
+To wrap your Java DEVS simulator in an FMU, look at the example model in devsfmu.
+You will need to implement your own version of DevsFMU.java to support your 
+simulation tool and and produce a version of GenrFMU that specializes your DevsFMU
+with the details of any particular simulation model.
+
+Good luck! You'll need it!
+
+Looking forwards, the FMU4j offers a nice starting point that mostly works out of
+the box. But it suffers from compatibility issues with modern tools, libraries,
+etc. that would need to be resolved and then maintained if this is going to
+turn into a really useful tool.
 
 #### JFrog artifactory
 
